@@ -1,0 +1,219 @@
+table.game tbody td,
+table.game thead th {
+	padding: 0;
+	font-size: 14px !important;
+}
+
+table.game thead tr th, table.game tbody th {
+	background-color: #222222 !important;
+}
+
+table.game thead tr th {
+	border-top: 1px solid #404040 !important;
+}
+
+table.game tbody td {
+	padding-top: 5px;
+}
+
+.dataTables_wrapper {
+	border: 1px #404040 solid;
+	border-bottom: none;
+	border-top: none;
+}
+
+div.game-maps-box,
+div.game-comps-box,
+div.game-perf-box,
+div.game-team-box {
+	display: inline-flex;
+	min-width: 100%;
+	max-width: 100%;
+}
+
+img.game-header-logo {
+	height: 25px;
+	width: 25px;
+	margin-bottom: 5px;
+    margin-left: 3px;
+}
+
+div.game-text-header {
+	margin: 15px 10px 2px;
+	border: 1px solid #404040;
+	background-color: #222222;
+	font-size: 20px;
+	font-weight: bold;
+	padding-top: 2px;
+	text-align: center;
+}
+
+p.game-header-gamelog {
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	margin: 2px auto 0;
+}
+
+div.game-table-spacer {
+	min-width: 50%;
+	max-width: 50%;
+	padding: 10px;
+}
+
+img.game-team-logo {
+	height: 42px !important;
+	width: 42px;
+}
+div.game-name {
+	min-width: 50%;
+	max-width: 50%;
+	font-size: 30px;
+	margin-bottom: 10px;
+	margin-left: 5px;
+	text-align: center;
+}
+
+div.game-team-box {
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+img.game-team-logo {
+	height: 48px;
+	width: 48px;
+}
+
+/*MBLOCKS*/
+div.game-map-super {
+	position: relative;
+	border: 1px solid #404040;
+	text-align: left;
+	width: 111px;
+	height: 115px;
+	font-size: 12px;
+	font-weight: bold;
+	text-shadow: -1px 0 2px black, 0 1px 2px black, 1px 0 2px black, 0 -1px 2px black,
+			-1px 0 1px black, 0 1px 1px black, 1px 0 1px black, 0 -1px 1px black,
+			-1px 0 3px black, 0 1px 3px black, 1px 0 3px black, 0 -1px 3px black;
+	margin-right: 2px;
+	margin-bottom: 4px;
+}
+
+div.game-map-wrapper {
+	padding-left: 11px;
+	width: 50%;
+	text-align: center;
+}
+
+img.game-map-img-file {
+	width: 100%;
+	height: 100%
+}
+
+div.game-map-fight-wins {
+	font-size: 12px;
+	position: absolute;
+	display: inline-flex;
+	bottom: 53px;
+	left: 4px;
+	width: 70%;
+}
+
+div.game-map-name {
+	font-size: 12px;
+	position: absolute;
+	display: inline-flex;
+	top: 2px;
+	left: 4px;
+	width: 95%;
+}
+
+div.game-map-time {
+	position: absolute;
+	bottom: 2px;
+	left: 4px;
+}
+
+div.game-map-flen {
+	position: absolute;
+	bottom: 20px;
+	left: 4px;
+	font-weight: 400;
+	font-style: italic;
+}
+
+div.game-map-prog {
+	position: absolute;
+	bottom: 36px;
+	left: 4px;
+	font-weight: 400;
+	font-style: italic;
+}
+
+div.game-map-fwin-spacer {
+	margin-right: 5px;
+}
+
+div.game-map-fwin {
+	cursor: pointer;
+}
+
+div.game-map-awin {
+	color: indianred;
+	cursor: pointer;
+}
+
+div.game-map-dwin {
+	color: deepskyblue;
+	cursor: pointer;
+}
+
+div.game-map-display {
+	display: inline-flex;
+}
+
+table.gamelog {
+    outline: 1px solid #404040;
+    border-bottom: none !important;
+    margin-bottom: 10px;
+	min-width: 100%;
+	font-size: 12px;
+}
+
+tr.row-attack {
+	background-color: #261818;
+}
+
+tr.row-defense {
+	background-color: #181e26;
+}
+
+tr.gamelog-row {
+	height: 35px;
+}
+
+td.gamelog-cell-center, div.gamelog-cell-center {
+	text-align: center;
+}
+
+img.gamelog-header-img {
+	height: 18px;
+}
+
+div.collapsible {
+	padding-left: 10px;
+	max-width: 50%;
+	margin: 0 auto;
+}
+
+div.gamelog-header {
+	display: inline-flex;
+	min-width: 100%;
+	font-size: 12px;
+	padding: 6px;
+	margin-bottom: 4px;
+	background-color: #222222;
+	border: 1px solid #404040;
+}

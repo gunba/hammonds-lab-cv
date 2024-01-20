@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+{% set active_page = active_page|default('index') -%}
+
+<html lang="en">
+   <head>
+        <!-- Basic Page Needs
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta charset="utf-8" content="">
+        <title>Index</title>
+        <meta name="description"  content="">
+        <meta name="author" content="">
+        <!-- Mobile Specific Metas
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- FONT
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+        <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='loading.css') }}">
+        <style type="">
+            ::-webkit-scrollbar { width: 10px; }
+            ::-webkit-scrollbar-track { background: #f1f1f1; }
+            ::-webkit-scrollbar-thumb { background: #888; }
+            ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+            @font-face {
+                font-family: "DIN";
+                src: url("{{ url_for('static', filename='fonts/DIN.ttf') }}");
+            }
+        </style>
+   </head>
+   <body>
+      <div class="secret-buttons">
+          <a href="{{url_for('linker')}}"><button class="secret-button-linker">Linker</button></a>
+          <a href="{{url_for('upload')}}"><button class="secret-button-upload">Upload</button></a>
+          <a href="{{url_for('repair')}}"><button class="secret-button-repair">Repair</button></a>
+      </div>
+      {% block nav %}
+      {% endblock %}
+   </body>
+
+</html>

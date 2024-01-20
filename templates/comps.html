@@ -1,0 +1,109 @@
+{% extends "nav.html" %}
+{% set active_page = "comps" %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='modal/modal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='modal/comp.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='tables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='comps.css') }}">
+    <form method="post">
+        <div class="gunba-div">
+            <button id="load" name="load" class="gunba-button" value="load">Load</button>
+            <label>
+                <select name="team" class="gunba-select" style="width: 240px;">
+                    <option value="">Team</option>
+                    {% for x in const['defaults'] %}
+                        {% if x.name == 'team' %}
+                            <option value="{{x.val}}" {{'selected' if params['team'] == x.val}}>{{x.val}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <label>
+                <select name="hero_filter" class="gunba-select" style="width: 156px;">
+                    <option value="">Hero</option>
+                    {% for x in const['defaults'] %}
+                        {% if x.name == 'hero' %}
+                            <option value="{{x.val}}" {{'selected' if params['hero_filter'] == x.val}}>{{x.val}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <label>
+                <select name="patch" class="gunba-select" style="width: 132px;">
+                    <option value="">Patch</option>
+                    {% for x in const['defaults'] %}
+                        {% if x.name == 'patch' %}
+                            <option value="{{x.val}}" {{'selected' if params['patch'] == x.val}}>{{x.val}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <label>
+                <select name="region" class="gunba-select" style="width: 144px;">
+                    <option value="">Region</option>
+                    {% for x in const['defaults'] %}
+                        {% if x.name == 'region' %}
+                            <option value="{{x.val}}" {{'selected' if params['region'] == x.val}}>{{x.val}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <input name="mindate" type="date" class="gunba-date" placeholder="Min Date" value="{{params['mindate']}}" style="width: 156px;">
+            <input name="maxdate" type="date" class="gunba-date" placeholder="Max Date" value="{{params['maxdate']}}" style="width: 156px;">
+            <input name="timeplayed" type="number" id="timeplayed" class="gunba-input" placeholder="Timeplayed" size="10" min="0" value="{{params['timeplayed']}}" oninput="validity.valid||(value='');" style="width: 70px;">
+        </div>
+    </form>
+    <div id="tablediv" style="opacity: 0 !important;">
+    {% if table %}
+        {{ table|safe }}
+        <script>
+            jQuery(document).ready(function($) {
+                let maintr = $('#main tr');
+                let main = $('#main');
+                let tablediv = $('#tablediv');
+
+                $(maintr).find('th:last-child, td:last-child').hide();
+
+                maintr.click(function()
+                {
+                    if ($(this).is('[data-href]')) {
+                        let href = $(this).attr('data-href') + '&' + $('form').serialize();
+                        $.get(href, function (html) {
+                            let modal = $(html).appendTo('body').modal({
+                              escapeClose: false
+                            })[0];
+                            $('.close-modal, .jquery-modal.blocker.current').click(function (e) {
+                                if (e.target === this) {
+                                    modal.remove();
+                                }
+                            });
+                        });
+                    }
+                });
+
+                let table = main.DataTable({
+                    searching:      false,
+                    lengthChange:   false,
+                    pageLength:     18,
+                    scrollX:        false,
+                    scrollY:        false,
+                    paging:         true,
+                    stripeClasses: [],
+                    order: [[ 2, "desc" ]],
+                    createdRow: function(row) {
+                          $(row).attr('data-href', '/modal/comp?comp=' + row.cells[row.cells.length-1].innerHTML);
+                      }});
+
+                window.unfuck_columns = setTimeout(function() {
+                    table.columns.adjust();
+                    tablediv.removeAttr('style');
+                }, 50);
+
+
+            });
+        </script>
+    </div>
+    {% else %}
+        No data loaded. If you load without any filters (see above), the request will take some time.
+    {% endif %}
+{% endblock %}

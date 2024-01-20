@@ -1,0 +1,101 @@
+{% extends "nav.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='dev/repair.css') }}">
+{% for k, v in repairs.items() %}
+    <div class="repair-main">
+        <div class="repair-map-box">
+            <div class="repair-map-image">
+                <img class="repair-map-image" src="data:image/png;base64,{{ v['load'].map }}" alt="">
+            </div>
+            <div class="repair-map-name">
+                    <select name="map" class="gunba-select" style="width: 240px;">
+                    {% for x in maps %}
+                        <option value="{{x}}">{{x}}</option>
+                    {% endfor %}
+                    </select>
+            </div>
+        </div>
+        <div class="repair-team-names">
+            <div class="repair-team-name">
+                <label class="repair-team-name">Left Team Name
+                    <input class="repair-team-name" name="left_team"/>
+                </label>
+            </div>
+            <div class="repair-team-name">
+                <label class="repair-team-name">Right Team Name
+                    <input class="repair-team-name" name="right_team"/>
+                </label>
+            </div>
+        </div>
+        <div class="repair-fields-box">
+            <div class="repair-team">
+                {% for i in range(0, 6) %}
+                    <div class="repair-player-name">
+                        <img src="data:image/png;base64,{{ v['joins'][i].source.name_ocr }}" alt=""/>
+                            <input class="repair-player-name" name="player-{{i}}" value="{{ v['joins'][i].source.name }}"/>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="repair-team">
+                {% for i in range(6, 12) %}
+                    <div class="repair-player-name">
+                        <img src="data:image/png;base64,{{ v['joins'][i].source.name_ocr }}" alt=""/>
+                            <input class="repair-player-name" name="player-{{i}}" value="{{ v['joins'][i].source.name }}"/>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="repair-meta">
+                    <select name="repair-patch" class="gunba-select" style="width: 240px;">
+                        {% for x in patches %}
+                            <option value="{{x}}">{{x}}</option>
+                        {% endfor %}
+                    </select>
+                    <select name="repair-region" class="gunba-select" style="width: 240px;">
+                        {% for x in regions %}
+                            <option value="{{x}}">{{x}}</option>
+                        {% endfor %}
+                    </select>
+            </div>
+        </div>
+        <div class="repair-button">
+            <button class="gunba-button" data-href="{{ k }}">Go</button>
+        </div>
+    </div>
+{% endfor %}
+<script>
+     jQuery(document).ready(function($) {
+        let clickables = $('.gunba-button');
+        $(clickables).click(function()
+        {
+            /*NOTE: God this is fucking terrible but who really cares.*/
+            let href = "modal/repair?filename=" + $(this).attr('data-href');
+
+            let block = $(this)[0].parentElement.parentElement;
+
+            let players = block.querySelectorAll('input.repair-player-name');
+            $(players).each(function(i) {
+                console.log($(this));
+                href = href + '&player' + i + '=' + $(this)[0].value;
+            });
+
+            let teams = block.querySelectorAll('input.repair-team-name');
+            $(teams).each(function(i) {
+                console.log($(this));
+                href = href + '&team' + i + '=' + $(this)[0].value;
+            });
+
+            let map = block.querySelectorAll('div.repair-map-name > select');
+            href = href + '&map=' + $(map)[0].value;
+
+            let meta = block.querySelectorAll('div.repair-meta > select');
+            href = href + '&patch=' + $(meta)[0].value;
+            href = href + '&region=' + $(meta)[1].value;
+
+            console.log(href);
+
+            $.get(href);
+            block.remove();
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,25 @@
+<div class="outer">
+    <div id="map-modal">
+    {% block modal %}
+        {{ table|safe }}
+        <script>
+            jQuery(document).ready(function($) {
+
+                $('#main').DataTable({
+                    searching:      false,
+                    lengthChange:   false,
+                    pageLength:     8,
+                    scrollX:        false,
+                    scrollY:        false,
+                    paging:         true,
+                    stripeClasses: [],
+                    order: [[ 2, "desc" ]]
+                    });
+
+                $('#main tr').find('th:last-child, td:last-child').hide();
+
+            });
+        </script>
+    {% endblock %}
+    </div>
+</div>

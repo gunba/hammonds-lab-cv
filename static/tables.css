@@ -1,0 +1,126 @@
+/* TABLE FONT SIZE + KILL OUTER BORDER */
+table {
+	font-size: 14px;
+	font-family: 'DIN', 'Verdana', sans-serif !important;
+	border: 0 !important;
+}
+
+/* TH SMALLER FONT */
+table th {
+	font-size: 12px;
+}
+
+/* MOUSEOVER FLASH */
+table tr:hover td {
+	background-color: #2b2b2b !important;
+	cursor: pointer;
+}
+
+/* TABLE HEADER COLORS + KILL INNER BORDER */
+table thead tr th {
+	/*background-color: #165d7f !important;*/
+	background-color: #222222 !important;
+	color: #e9e9e9 !important;
+	border-bottom: solid 1px #404040 !important;
+	border-left: none !important;
+	border-right: none !important;
+	border-top: none !important;
+	text-transform: uppercase;
+	text-shadow: 0 0 1px black, 0 0 1px black;
+	margin-top: 5px;
+
+}
+
+/* DULL GREY ROW BORDERS IN BODY */
+table tbody tr td {
+	color: #e9e9e9 !important;
+	border: 0 !important;
+	border-bottom: 1px solid #565656 !important;
+}
+
+/* INVERT INFO BLOCKS (B-W) */
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+	color: #696969;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	color: #a9a9a9 !important;
+}
+
+.dataTables_wrapper {
+	border: 1px #404040 solid !important;
+}
+
+
+/* REMOVE SORTING ARROWS */
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc
+{
+	background-image: unset !important;
+	text-align: center;
+}
+
+/* HEADER PADDING.*/
+table.dataTable thead th {
+	text-align: center !important;
+	text-transform: uppercase;
+}
+
+/* BODY PADDING */
+table.dataTable tbody td {
+	text-align: center;
+	color: #e9e9e9;
+	background-color: #1d1d1d;
+}
+
+/* PUTTING OW IMAGES IN TABLES */
+img.table-inline-comp {
+	border-collapse: collapse;
+	height: 26px;
+}
+
+img.table-inline-ability {
+	border-collapse: collapse;
+	height: 23px;
+}
+
+span.table-inline-comp {
+	border: 1px solid #565656 !important;
+	display: inline-flex;
+}
+
+img.table-inline-map {
+	border-collapse: collapse;
+	width: 45px;
+	height: 28px;
+}
+
+span.table-inline-map {
+	border: 1px solid #565656 !important;
+	display: inline-flex;
+}
+
+a.paginate_button {
+	background: none !important;
+	border: none !important;
+	color: #a9a9a9 !important;
+}
+
+a.paginate_button:hover {
+	outline: 0 !important;
+}
+
+a.paginate_button:active {
+	outline: 0 !important;
+}
+
+img.team-logo-big {
+	height: 24px;
+	display: inline-table;
+	margin-right: 4px;
+}
+
+img.team-logo-small {
+	height: 20px;
+	display: inline-flex;
+}

@@ -1,0 +1,147 @@
+{% extends "nav.html" %}
+{% set active_page = "maps" %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='comps.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='maps.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='tables.css') }}">
+    <form method="post">
+        <div class="gunba-div">
+            <button id="load" name="load" class="gunba-button" value="load">Load</button>
+            <label>
+                <select name="team" class="gunba-select" style="width: 240px;">
+                    <option value="">Team</option>
+                    {% for x in const['defaults'] %}
+                        {% if x.name == 'team' %}
+                            <option value="{{x.val}}" {{'selected' if params['team'] == x.val}}>{{x.val}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <label>
+                <select name="patch" class="gunba-select" style="width: 132px;">
+                    <option value="">Patch</option>
+                    {% for x in const['defaults'] %}
+                        {% if x.name == 'patch' %}
+                            <option value="{{x.val}}" {{'selected' if params['patch'] == x.val}}>{{x.val}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <label>
+                <select name="region" class="gunba-select" style="width: 144px;">
+                    <option value="">Region</option>
+                    {% for x in const['defaults'] %}
+                        {% if x.name == 'region' %}
+                            <option value="{{x.val}}" {{'selected' if params['region'] == x.val}}>{{x.val}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <input name="mindate" type="date" class="gunba-date" placeholder="Min Date" value="{{params['mindate']}}" style="width: 156px;">
+            <input name="maxdate" type="date" class="gunba-date" placeholder="Max Date" value="{{params['maxdate']}}" style="width: 156px;">
+        </div>
+    </form>
+    <div id="tablediv" style="opacity: 0 !important;">
+    {% if table is not none %}
+        <div id="mapholder">
+            {% for k, v in table.iterrows() %}
+                <div class="map-block-main">
+                    <div class="map-block-left" data-href="?map={{ v['map'] }}">
+                        <div class="game-map-andthis">
+                            <img class="map-block-img-file" src="/static/ow/maps/{{v['map']}}.jpg" alt=""/>
+                            <div class="map-block-name">{{ v['map'] }}</div>
+                            <div class="map-block-time">{{ v['t'] }} ({{ v['f'] }})</div>
+                            <div class="map-block-prog">
+                                {% if v['mode'] == 'CONTROL' %}
+                                    <i>{{ v['rlw'] }}</i>
+                                    rollout(μ)
+                                {% else %}
+                                    <i style="color: indianred">{{ v['aprog'] }}</i>
+                                    <i style="color: deepskyblue">{{ v['dprog'] }}</i>
+                                    caps(μ)
+                                {% endif %}
+                            </div>
+                            <div class="map-block-flen">{{ v['flen'] }}s fightlen(μ)</div>
+                            <div class="map-block-start">
+                                <i style="color: indianred">{{ v['saw'] }}</i>
+                                <i style="color: deepskyblue">{{ v['sdw'] }}</i>
+                                bias(μ)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-block-right">
+                         <div class="map-block-info">
+                             <div class="map-block-top">
+                                 <div class="map-block-fwin" data-href="?map={{ v['map'] }}">{{ v['fwm'] }}</div>
+                                 <div class="map-block-atk" data-href="?map={{ v['map'] }}&side=0">{{ v['aw'] }}</div>
+                                 <div class="map-block-def" data-href="?map={{ v['map'] }}&side=1">{{ v['dw'] }}</div>
+                            </div>
+                             <div class="map-block-bottom">
+                                 <div class="map-block-bottom-fwin">fw</div>
+                                 <div class="map-block-bottom-atk" >atk</div>
+                                 <div class="map-block-bottom-def">def</div>
+                             </div>
+                        </div>
+                        <div class="map-block-points">
+                             <div class="map-block-third">
+                                 <div class="map-block-point-subtext">1</div>
+                                 <div class="map-block-fwin" data-href="?map={{ v['map'] }}&objective=1">{{ v['fw1'] }}</div>
+                                 <div class="map-block-atk" data-href="?map={{ v['map'] }}&objective=1&side=0">{{ v['aw1'] }}</div>
+                                 <div class="map-block-def" data-href="?map={{ v['map'] }}&objective=1&side=1">{{ v['dw1'] }}</div>
+                            </div>
+                            <div class="map-block-third">
+                                 <div class="map-block-point-subtext">2</div>
+                                 <div class="map-block-fwin" data-href="?map={{ v['map'] }}&objective=2">{{ v['fw2'] }}</div>
+                                 <div class="map-block-atk" data-href="?map={{ v['map'] }}&objective=2&side=0">{{ v['aw2'] }}</div>
+                                 <div class="map-block-def" data-href="?map={{ v['map'] }}&objective=2&side=1">{{ v['dw2'] }}</div>
+                            </div>
+                            <div class="map-block-third">
+                                 <div class="map-block-point-subtext">3</div>
+                                 <div class="map-block-fwin" data-href="?map={{ v['map'] }}&objective=3">{{ v['fw3'] }}</div>
+                                 <div class="map-block-atk" data-href="?map={{ v['map'] }}&objective=3&side=0">{{ v['aw3'] }}</div>
+                                 <div class="map-block-def" data-href="?map={{ v['map'] }}&objective=3&side=1">{{ v['dw3'] }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {%endfor%}
+        </div>
+        <script>
+            jQuery(document).ready(function($) {
+                $('#tablediv').removeAttr('style');
+
+                let clickables = document.querySelectorAll("div[data-href]");
+                $(clickables).click(function()
+                {
+                    let modalhref = "modal/map" + $(this).attr('data-href') + '&' + $('form').serialize();
+                    console.log(modalhref);
+                    $.get(modalhref, function(r)
+                    {
+                         let foo = $.parseHTML(r);
+                        $('#map-modal').replaceWith(foo[0].lastElementChild);
+
+                        $('#main tr').find('th:last-child, td:last-child').hide();
+
+                        let table = $('#main').DataTable({
+                            searching:      false,
+                            lengthChange:   false,
+                            pageLength:     10,
+                            scrollX:        false,
+                            scrollY:        false,
+                            bDestroy:       true,
+                            order: [[ 2, "desc" ]]
+                        });
+
+                        table.columns.adjust();
+                    });
+                });
+
+
+            });
+        </script>
+    </div>
+    <div id="map-modal"></div>
+    {% else %}
+        No data loaded. If you load without any filters (see above), the request will take some time.
+    {% endif %}
+{% endblock %}

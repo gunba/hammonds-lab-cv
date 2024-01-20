@@ -1,0 +1,8 @@
+table.games tbody td {
+	padding: 2px 0 !important;
+}
+
+table.games thead th {
+	padding: 0 0 !important;
+}
+

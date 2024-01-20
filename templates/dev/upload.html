@@ -1,0 +1,9 @@
+{% extends "nav.html" %}
+{% block content %}
+<h1>Upload files to database</h1>
+<p>Please make sure all files are repaired - the database will be refreshed afterwards.</p>
+<p>There is currently {{ json }} rounds ready to be uploaded.</p>
+<form method="post">
+<button id="load" name="load" class="gunba-button" value="load">I understand, upload to database</button>
+</form>
+{% endblock %}

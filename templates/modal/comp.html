@@ -1,0 +1,76 @@
+{% block modal %}
+<div id="modal" class="modal" style="opacity: 0">
+    <div id="loading" class="loading"></div>
+    <div class = "modal-header">
+       <img class="gunba-map-img" id="mapimg" src="{{ url_for('static', filename='ow/maps/ALL.jpg') }}"  alt=""/>
+       <select id="mapsel" name="mapsel" class="gunba-select">
+      <option>ALL</option>
+         {% for x in params['maps'] %}
+             <option value="{{x}}">{{x}}</option>
+         {% endfor %}
+      </select>
+      {{ heroify|safe }}
+    </div>
+    <div id="inner" class="bg-container">
+       {{ table|safe }}
+       <div id="submodal" class="modal-head-to-head">
+            <div id="hth_submodal_guide" class="hth_submodal_guide">
+                <p>Click one of the rows above to view individual hero head to head performance</p>
+            </div>
+       </div>
+    </div>
+
+   <script>
+        function buildDatatable()
+        {
+            $('#comp tr').find('th:last-child, td:last-child').hide();
+
+            $('#comp').DataTable({
+                searching:      false,
+                lengthChange:   false,
+                pageLength:     8,
+                scrollX:        false,
+                scrollY:        false,
+                paging:         true,
+                bDestroy:       true,
+                order: [[ 2, "desc" ]],
+                createdRow: function(row) {
+                      $(row).attr('data-href', "/modal/submodal/hth?map=" + $('#mapsel').val() + "&left={{ params['comp'] }}&right=" + row.cells[row.cells.length-1].innerHTML);
+                  }
+            });
+        }
+
+        function buildSubmodals()
+        {
+            $('#comp tr').click(function()
+            {
+                if ($(this).is('[data-href]')) {
+                    $.get($(this).attr('data-href'), function (html) {
+                        $('#submodal').replaceWith(html);
+                    });
+                }
+            });
+
+        }
+
+        jQuery(document).ready(function($) {
+            $('#mapsel').change(function(){
+                let map = $('#mapsel').val();
+                $('#mapimg').attr('src', '/static/ow/maps/' + map + '.jpg');
+                let modalhref = "/modal/comp?comp={{ params['comp'] }}&map=" + map;
+                $.get(modalhref, function(r)
+                {
+                    let foo = $.parseHTML(r);
+                    $('#inner').replaceWith(foo[1].lastElementChild);
+                    buildSubmodals();
+                    buildDatatable();
+                });
+            });
+
+            buildSubmodals();
+            buildDatatable();
+            $('#modal').removeAttr('style')
+        });
+   </script>
+</div>
+{% endblock %}

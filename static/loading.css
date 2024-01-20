@@ -1,0 +1,17 @@
+#loading.loading {
+	min-height:200px;
+	min-width: 200px;
+	position: absolute;
+    width:200px; /*image width */
+    height:200px; /*image height */
+    left:50%;
+    top:50%;
+    margin-left:-100px; /*image width/2 */
+    margin-top:-100px; /*image height/2 */
+	z-index: 10
+}
+
+div.loading {
+	display: flex;
+  	justify-content: center;
+}

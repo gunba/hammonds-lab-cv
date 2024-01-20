@@ -1,0 +1,28 @@
+{% block submodal %}
+<div id="submodal" class="submodal">
+    {{ table|safe }}
+</div>
+<script>
+    jQuery(document).ready(function($) {
+        $('#hth tr').each(function(i, el) {
+            if (i < 7) {
+                $(el).addClass("blue");
+            }
+            else {
+                $(el).addClass("red")
+            }
+        });
+
+        $('#hth').DataTable({
+            searching:      false,
+            lengthChange:   false,
+            pageLength:     12,
+            scrollX:        false,
+            scrollY:        false,
+            paging:         false,
+            bDestroy:       true,
+            bInfo: false
+        });
+    });
+</script>
+{% endblock %}

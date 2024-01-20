@@ -1,0 +1,42 @@
+{% extends "nav.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='dev/watcher.css') }}">
+{% for k, v in info.items() %}
+    <div class="watcher-upload-box">
+        <div class="watcher-thumbnail">
+            <img class="watcher-thumbnail" src="{{ v['thumbnail'] }}" alt=""/>
+        </div>
+        <div class="watcher-info-box">
+            <div class="watcher-title">
+                <p class="watcher-title">{{ v['title'] }}</p>
+            </div>
+            <div class="watcher-uploader">
+                <p class="watcher-uploader">{{ v['uploader'] }}</p>
+                <p class="watcher-date">{{ v['upload_date'] }}</p>
+                <p class="watcher-link">{{ k }}</p>
+            </div>
+        </div>
+        <div class="watcher-button">
+            <select name="config" class="gunba-select" style="width: 120px;">
+                {% for x in ui %}
+                    <option value="{{x}}">{{x}}</option>
+                {% endfor %}
+            </select>
+            <button class="watcher-upload-button" data-href="{{ v['id'] }}&date={{ v['upload_date'] }}">
+                WATCH
+            </button>
+        </div>
+    </div>
+{% endfor %}
+<script>
+     jQuery(document).ready(function($) {
+        var clickables = $('.watcher-upload-button');
+        $(clickables).click(function()
+        {
+            let href = "modal/watcher?url=" + $(this).attr('data-href') + '&cfg=' + $(this)[0].previousElementSibling.value;
+            $.get(href);
+            $(this)[0].parentNode.parentNode.remove();
+        });
+    });
+</script>
+{% endblock %}

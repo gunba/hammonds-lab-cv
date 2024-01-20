@@ -1,0 +1,7 @@
+table.comps thead th {
+	padding: 0 2px !important;
+}
+
+table.comps tbody td {
+	padding: 4px 0 1px;
+}

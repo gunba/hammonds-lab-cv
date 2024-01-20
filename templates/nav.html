@@ -1,0 +1,36 @@
+{% extends "header.html" %}
+{% block nav %}
+<link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
+<img class="site-header" src="{{url_for('static', filename='ow/assets/header.png')}}"  alt=""/>
+<div class="topnav">
+    <a class="{{ 'active' if active_page == 'perf' else ''}}" href="{{url_for('perf')}}">perf</a>
+    <a class="{{ 'active' if active_page == 'comps' else ''}}" href="{{url_for('comps')}}">comps</a>
+    <a class="{{ 'active' if active_page == 'maps' else ''}}" href="{{url_for('maps')}}">maps</a>
+    <a class="{{ 'active' if active_page == 'games' else ''}}" id=games href="{{url_for('games')}}">games</a>
+    <a class="disabled" href="{{url_for('players')}}">players</a>
+    <a class="disabled" href="{{url_for('teams')}}">teams</a>
+</div>
+<div class="loading"><img style="display: none;" id="loading" class="loading" src="{{url_for('static', filename='ow/assets/loading.gif')}}"/></div>
+<div class="bg">
+ <div class="bg-container">
+      {% block content %}
+      {% endblock %}
+
+      <div class="scrollbar" id="style-2">
+        <div class="force-overflow"></div>
+      </div>
+
+    <script>
+        $('#load, #games').click(function(){
+                $('#loading').show();
+                $('.bg-container').hide();
+        });
+
+        jQuery(document).ready(function($) {
+            $('#loading').hide();
+        });
+    </script>
+    {% endblock %}
+    </div>
+</div>
+</button>

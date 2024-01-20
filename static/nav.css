@@ -1,0 +1,46 @@
+/* Add a black background color to the top navigation */
+.topnav {
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  color: #f9f9f9;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: -1px 0 2px black, 0 1px 2px black, 1px 0 2px black, 0 -1px 2px black,
+                -1px 0 1px black, 0 1px 1px black, 1px 0 1px black, 0 -1px 1px black,
+                -1px 0 3px black, 0 1px 3px black, 1px 0 3px black, 0 -1px 3px black;
+}
+
+.topnav img {
+  vertical-align: bottom;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  color: #ffbc38;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-image: url(ow/assets/arrowleft.png), url(ow/assets/arrowright.png);
+  background-position: left, right;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 28px 28px, 28px 28px;
+}
+
+/* DISABLE INACTIVE MODULES */
+a.disabled {
+	pointer-events: none !important;
+	cursor: default !important;
+	color: #666666	!important;
+}

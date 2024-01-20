@@ -1,0 +1,18 @@
+{% extends "nav.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='dev/linker.css') }}">
+<h1>Shhh, it's a secret.</h1>
+<div class="linker-upload-box">
+    <p>Paste in video links (Twitch or YouTube). One per line</p>
+    <p>Click the button below to verify each link.</p>
+    <form method="post">
+    <div class="linker-button"><button id="load" name="load" class="gunba-button" value="load">GET METADATA</button></div>
+    <div class="linker-textarea"><label>
+        <textarea name="urls" class="linker-textarea" rows="10" cols="50"></textarea>
+    </label></div>
+    <div class="linker-warning">Don't do anything you're not supposed to or we'll download your ip address and steal your ram</div>
+    </form>
+    <script>
+    </script>
+</div>
+{% endblock %}

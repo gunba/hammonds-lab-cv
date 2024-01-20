@@ -1,0 +1,187 @@
+table.maps thead th {
+	padding: 0 0 !important;
+}
+
+table.maps tbody td {
+	padding: 2px 0 !important;
+}
+
+/*MAPS*/
+/*div.map-info-super {*/
+	/*display: inline-flex;*/
+/*}*/
+
+/*div.map-info {*/
+	/*border: 1px solid #565656 !important;*/
+	/*margin: 5px 2px 2px;*/
+/*}*/
+
+/*img.map-info {*/
+	/*max-width: 585px;*/
+/*}*/
+
+/*MBLOCKS*/
+div.map-block-main {
+	width: 389px;
+	height: 125px;
+	display: inline-flex;
+	margin-bottom: 5px;
+	border: 1px solid #565656;
+	text-align: center;
+}
+
+div.map-block-left {
+	width: 36%;
+	height: 100%;
+	font-size: 12px;
+	font-weight: bold;
+	text-shadow: -1px 0 2px black, 0 1px 2px black, 1px 0 2px black, 0 -1px 2px black,
+			-1px 0 1px black, 0 1px 1px black, 1px 0 1px black, 0 -1px 1px black,
+			-1px 0 3px black, 0 1px 3px black, 1px 0 3px black, 0 -1px 3px black;
+	cursor: pointer;
+}
+
+div.game-map-andthis {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-right: 1px solid #565656;
+	text-align: left;
+}
+
+img.map-block-img-file {
+	width: 100%;
+	height: 100%
+}
+
+div.map-block-right {
+	width: 64%;
+	height: 100%;
+	text-shadow: 1px 1px 1px #000;
+}
+
+div.map-block-name {
+	font-size: 15px;
+	padding-right: 15px;
+	position: absolute;
+	top: 6px;
+	left: 8px;
+}
+
+
+div.map-block-time {
+	position: absolute;
+	bottom: 6px;
+	left: 8px;
+}
+
+div.map-block-flen {
+	position: absolute;
+	bottom: 24px;
+	left: 8px;
+	font-weight: 400;
+	font-style: italic;
+}
+
+
+div.map-block-start {
+	position: absolute;
+	bottom: 56px;
+	left: 8px;
+	font-weight: 400;
+	font-style: italic;
+}
+
+div.map-block-prog {
+	position: absolute;
+	bottom: 40px;
+	left: 8px;
+	font-weight: 400;
+	font-style: italic;
+}
+
+div.map-block-info {
+	width: 100%;
+	height: 40%;
+	border-bottom: 1px solid #565656;
+}
+
+div.map-block-top {
+	width: 100%;
+	height: 70%;
+	display: inline-flex;
+	font-size: 24px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+div.map-block-fwin {
+	min-width: 33.3%;
+	cursor: pointer;
+}
+
+div.map-block-atk {
+	color: indianred;
+	min-width: 33.3%;
+	cursor: pointer;
+}
+
+div.map-block-def {
+	color: deepskyblue;
+	min-width: 33.3%;
+	cursor: pointer;
+}
+
+div.map-block-bottom {
+	width: 100%;
+	height: 30%;
+	display: inline-flex;
+	position: relative;
+	bottom: 48px;
+	font-style: italic;
+	color: dimgrey;
+	font-size: 10px;
+}
+
+div.map-block-bottom-fwin {
+	width: 33%;
+	height: 100%;
+}
+
+div.map-block-bottom-atk {
+	width: 33%;
+	height: 100%;
+}
+
+div.map-block-bottom-def {
+	width: 33%;
+	height: 100%;
+}
+
+div.map-block-third {
+	width: 100%;
+	display: flex;
+	font-size: 15px;
+	font-weight: 400;
+	font-style: italic;
+	min-height: 33%;
+
+}
+
+div.map-block-points {
+	width: 100%;
+	height: 60%;
+}
+
+div.map-block-point-subtext {
+    width: 0;
+    position: relative;
+    color: dimgrey;
+    font-size: 10px;
+    left: 5px;
+	top: 3px;
+}
+
+/*div.map-modal {*/
+	/*margin-bottom: 5px;*/
+/*}*/

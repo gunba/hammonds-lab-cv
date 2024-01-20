@@ -1,0 +1,7 @@
+table.perf tbody td {
+	padding: 3px 8px !important;
+}
+
+table.perf thead th {
+	padding: 0 8px !important;
+}

@@ -1,0 +1,81 @@
+{% extends "nav.html" %}
+{% set active_page = "perf" %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='tables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='perf.css') }}">
+    <form method="post">
+        <div class="gunba-div">
+            <button id="load" name="load" class="gunba-button" value="load">Load</button>
+            <label>
+                <select name="team" class="gunba-select" style="width: 240px;">
+                    <option value="">Team</option>
+                    {% for x in const['defaults'] %}
+                        {% if x.name == 'team' %}
+                            <option value="{{x.val}}" {{'selected' if params['team'] == x.val}}>{{x.val}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <label>
+                <select name="hero" class="gunba-select" style="width: 156px;">
+                    <option value="">Hero</option>
+                    {% for x in const['defaults'] %}
+                        {% if x.name == 'hero' %}
+                            <option value="{{x.val}}" {{'selected' if params['hero'] == x.val}}>{{x.val}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <label>
+                <select name="patch" class="gunba-select" style="width: 132px;">
+                    <option value="">Patch</option>
+                    {% for x in const['defaults'] %}
+                        {% if x.name == 'patch' %}
+                            <option value="{{x.val}}" {{'selected' if params['patch'] == x.val}}>{{x.val}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <label>
+                <select name="region" class="gunba-select" style="width: 144px;">
+                    <option value="">Region</option>
+                    {% for x in const['defaults'] %}
+                        {% if x.name == 'region' %}
+                            <option value="{{x.val}}" {{'selected' if params['region'] == x.val}}>{{x.val}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <input name="mindate" type="date" class="gunba-date" placeholder="Min Date" value="{{params['mindate']}}" style="width: 156px;">
+            <input name="maxdate" type="date" class="gunba-date" placeholder="Max Date" value="{{params['maxdate']}}" style="width: 156px;">
+            <input name="timeplayed" type="number" id="timeplayed" class="gunba-input" placeholder="Timeplayed" size="10" min="0" value="{{params['timeplayed']}}" oninput="validity.valid||(value='');" style="width: 70px;">
+        </div>
+    </form>
+    <div id="tablediv" style="opacity: 0 !important;">
+    {% if table %}
+            {{ table|safe }}
+            <script>
+                jQuery(document).ready(function($) {
+                    let main = $('#main');
+                    let tablediv = $('#tablediv');
+
+                    let table = main.DataTable({
+                        searching: false,
+                        lengthChange: false,
+                        pageLength: 20,
+                        scrollX: false,
+                        scrollY: false,
+                        paging: true,
+                        order: [[ 3, "desc" ]]
+                    });
+
+                    tablediv.removeAttr('style');
+
+                    table.columns.adjust();
+                });
+            </script>
+    </div>
+    {% else %}
+            No data loaded. If you load without any filters (see above), the request will take some time.
+    {% endif %}
+{% endblock %}

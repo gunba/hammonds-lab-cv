@@ -1,0 +1,23 @@
+div.bg-container {
+    max-width: 600px;
+}
+
+div.linker-button {
+    margin-bottom: 5px;
+}
+
+div.linker-textarea {
+    width: 100%;
+}
+
+textarea.linker-textarea {
+    width: 100%;
+    color: #d9d9d9;
+    background-color: #1a1a1a;
+}
+
+div.linker-warning {
+    margin-top: 5px;
+    color: darkred;
+    font-size: 10px;
+}

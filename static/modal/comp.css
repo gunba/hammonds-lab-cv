@@ -1,0 +1,64 @@
+/* MAP IMAGE (SELECTOR) */
+img.gunba-map-img {
+	max-width: calc(39px*1.6);
+	border: 2px solid #565656 !important;
+	display: inline-block;
+	margin-right: 5px;
+}
+
+/* COMP LIST IN MODAL */
+img.modal-comp {
+	border-left: 1px solid #1d1d1d !important;
+	border-collapse: collapse;
+	display: block;
+	background: #1d1d1d;
+	height: 39px;
+	width: 44px;
+}
+
+/* SPAN FOR MODAL COMP LIST */
+span.modal-comp {
+	border: 1px solid #565656 !important;
+	margin-left: 5px;
+	display: inline-flex;
+}
+
+/* MODAL HEADER ROW */
+div.modal-header {
+	display: inline-flex;
+	border: none;
+}
+
+#mapsel.gunba-select {
+	width: 70%;
+}
+
+#hth_submodal_guide.hth_submodal_guide {
+	display: flex;
+    align-items: center;
+	margin-top: 10px;
+}
+
+#hth_submodal_guide.hth_submodal_guide p {
+	text-align: center;
+	font-size: 17px;
+	color: #e9e9e9;
+	margin: 0 auto;
+}
+
+table.hth tbody td, table.hth thead th {
+	padding: 2px 5px !important;
+}
+
+#submodal.submodal {
+	margin: 10px auto 0;
+}
+
+/* SUB MODAL TABLE FORMATTER */
+table.dataTable tr.red td {
+	background-color: #261818;
+}
+
+table.dataTable tr.blue td {
+	background-color: #181e26;
+}

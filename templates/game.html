@@ -1,0 +1,118 @@
+{% extends "nav.html" %}
+{% set active_page = "games" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='modal/modal.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='game.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='tables.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='games.css') }}">
+    <div class="game-team-box" data-href="?foo=foo">
+        {% for x in teams %}
+        <div class="game-name">
+            <img class="game-team-logo" src="{{ url_for('static', filename='ow/teams/') }}{{ x }}.png" alt=""/>
+            {{ x }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="game-maps-box">
+        {% for m in maps %}
+            <div class="game-map-wrapper">
+                <div class="game-map-box">
+                {% for k, v in m.iterrows() %}
+                    <div class="game-map-display">
+                        <div class="game-map-super">
+                            <img class="game-map-img-file" src="/static/ow/maps/{{v['map']}}.jpg" alt=""/>
+                            <div class="game-map-name">
+                                {{ v['map'] }}
+                            </div>
+                            <div class="game-map-fight-wins">
+                                 <div class="game-map-fwin game-map-fwin-spacer" data-href="map={{ v['map'] }}&">{{ v['fwm'] }}</div>
+                                 <div class="game-map-awin game-map-fwin-spacer" data-href="map={{ v['map'] }}&side=0&">{{ v['aw'] }}</div>
+                                 <div class="game-map-dwin game-map-fwin-spacer" data-href="map={{ v['map'] }}&side=1&">{{ v['dw'] }}</div>
+                            </div>
+                            <div class="game-map-time">{{ v['t'] }} ({{ v['f'] }})</div>
+                            <div class="game-map-prog">
+                                {% if v['mode'] == 'CONTROL' %}
+                                    <i>{{ v['rlw'] }}</i>
+                                    rwf
+                                {% else %}
+                                    <i style="color: indianred">{{ v['aprog'] }}</i>
+                                    <i style="color: deepskyblue">{{ v['dprog'] }}</i>
+                                    cp
+                                {% endif %}
+                            </div>
+                            <div class="game-map-flen">{{ v['flen'] }}s flen</div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div id="inner" class="replace-me">
+    </div>
+    <script>
+        jQuery(document).ready(function($) {
+            function map_filter(params) {
+                $.get("modal/game?" + params + "left_team={{teams[0]}}&right_team={{teams[1]}}" + "&left_id={{params['left_id']}}&right_id={{params['right_id']}}",
+                    function(r)
+                    {
+                        let foo = $.parseHTML(r);
+
+                        $('#inner').replaceWith(foo[1].lastElementChild);
+
+                        let tables = $('#scompl, #scompr, #sperfl, #sperfr');
+
+                        tables.find('th:first-child, td:first-child').hide();
+
+                        let comptables = $('#scompl, #scompr').DataTable({
+                            searching: false,
+                            lengthChange: false,
+                            pageLength: 10,
+                            scrollX: false,
+                            scrollY: false,
+                            bDestroy: true,
+                            order: [[2, "desc"]],
+                            paging: false,
+                            info: false
+                        });
+
+                        let perftables = $('#sperfl, #sperfr').DataTable({
+                            searching: false,
+                            lengthChange: false,
+                            pageLength: 10,
+                            scrollX: false,
+                            scrollY: false,
+                            bDestroy: true,
+                            order: [[3, "desc"]],
+                            paging: false,
+                            info: false
+                        });
+
+                        let collapsible = $('div.collapsible');
+                        collapsible.click(function()
+                        {
+                            $(this).find('.gamelog').toggle()
+                        });
+
+                        window.unfuck_columns = setTimeout(function() {
+                            comptables.columns.adjust();
+                            perftables.columns.adjust();
+                        }, 50);
+                    });
+            }
+
+            map_filter("");
+
+            let clickables = document.querySelectorAll("div[data-href]");
+            $(clickables).click(function()
+            {
+                if ($(this).is('[data-href]')) {
+                    let params =  $(this).attr('data-href');
+                    map_filter(params)
+                }
+            });
+        });
+
+
+    </script>
+{% endblock %}

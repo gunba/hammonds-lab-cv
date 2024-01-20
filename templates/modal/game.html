@@ -1,0 +1,61 @@
+{% block content %}
+<div class="outer">
+    <div id="inner" class="inner">
+        <div class="game-text-header">
+            <img alt="ow" class="game-header-logo" src="{{ url_for('static', filename='ow/assets/owlogo.png') }}"/>
+            COMPOSITIONS
+        </div>
+        <div class="game-comps-box">
+            {% for x in comps %}
+            <div class="game-table-spacer">
+                {{ x|safe }}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="game-text-header">
+            <img alt="ow" class="game-header-logo" src="{{ url_for('static', filename='ow/assets/owlogo.png') }}"/>
+            PERFORMANCE
+        </div>
+        <div class="game-perf-box">
+            {% for x in perfs %}
+            <div class="game-table-spacer">
+                {{ x|safe }}
+            </div>
+            {% endfor %}
+        </div>
+        {% if gamelog %}
+        <p class="game-header-gamelog">GAMELOG</p>
+        <div class="game-gamelog-box">
+            {% for k, v in gamelog.items() %}
+                <div class="collapsible">
+                    <div class="gamelog-header">
+                        <div style="width: 40%">{{ v[0].text|safe }}</div>
+                        <div style="width: 15%" class="gamelog-cell-center">{{ v[0].winner|safe  }}</div>
+                        <div style="width: 20%" class="gamelog-cell-center">
+                            <img class="gamelog-header-img" src="{{ url_for('static', filename='ow/assets/elim.png') }}" alt=""/>{{ v[0].kills|safe }}
+                        </div>
+                        <div style="width: 20%" class="gamelog-cell-center">
+                            <img class="gamelog-header-img" src="{{ url_for('static', filename='ow/assets/ult.png') }}" alt=""/>{{ v[0].ults|safe }}
+                        </div>
+                        <div style="width: 5%" class="gamelog-cell-center">{{ v[0].vod|safe }}</div>
+                    </div>
+                    <table class="gamelog" style="display: none;">
+                        <tbody>
+                            {% for e in v[1:] %}
+                            <tr class="gamelog-row row-{{ e.side.lower()|safe }}">
+                                <td width="12%" class="gamelog-cell-center">{{ e.time|safe }}</td>
+                                <td width="55%">{{ e.text|safe  }}</td>
+                                <td width="18%" class="gamelog-cell-center">{{ e.flavor|safe }}</td>
+                                <td width="8%" class="gamelog-cell-center">{{ e.nums|safe }}</td>
+                                <td width="7%" class="gamelog-cell-center">{{ e.vod|safe }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='modal/modal.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='tables.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='games.css') }}">
+{% extends "nav.html" %}
+{% set active_page = "games" %}
+{% block content %}
+    <div id="tablediv" style="opacity: 0 !important;">
+    {{ table|safe }}
+        <script>
+            jQuery(document).ready(function($) {
+                let main = $('#main tr');
+
+                main.find('th:nth-of-type(-n+2), td:nth-of-type(-n+2)').hide();
+
+                main.click(function()
+                {
+                    if ($(this).is('[data-href]')) {
+                        window.location.href = $(this).attr('data-href');
+                    }
+                });
+
+                $('#main').DataTable({
+                    searching: false,
+                    lengthChange: false,
+                    pageLength: 25,
+                    scrollX: false,
+                    scrollY: false,
+                    bDestroy: true,
+                    order: [[10, "desc"]],
+                    createdRow: function(row) {
+                              $(row).attr('data-href', '/game?left_id=' + row.cells[0].innerHTML + "&right_id=" + row.cells[1].innerHTML);
+                          }
+                });
+
+                //table.columns.adjust();
+
+                $('#tablediv').removeAttr('style');
+            });
+        </script>
+    </div>
+{% endblock %}
