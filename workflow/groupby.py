@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from settings.timeit import timeit
 
 pd.set_option('precision', 5)

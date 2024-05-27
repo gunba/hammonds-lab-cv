@@ -151,7 +151,7 @@ class Framestate(object):
         else:
             _left = find_template_match(obj_left, self.res.OBJ_ROUND_SCORE_LEFT + self.res.OBJ_ROUND_SCORE_RIGHT, threshold=self.cfg.TM_THRESH_OBJ, single=True, color=False)
             _right = find_template_match(obj_right, self.res.OBJ_ROUND_SCORE_LEFT + self.res.OBJ_ROUND_SCORE_RIGHT, threshold=self.cfg.TM_THRESH_OBJ, single=True, color=False)
-            if not None in (_left, _right):
+            if None not in (_left, _right):
                 #Found a match on both sides. Need to figure out which is real.
                 left_color = a.get_edge_color(obj_left[c.MOD_BGR][_left.y:_left.y + _left.entity.image[c.HEIGHT], _left.x:_left.x + _left.entity.image[c.WIDTH]], 5, 32, 14, 36, self.cfg.UI_COLOR_MATCHING)
                 right_color = a.get_edge_color(obj_right[c.MOD_BGR][_right.y:_right.y + _right.entity.image[c.HEIGHT], _right.x:_right.x + _right.entity.image[c.WIDTH]], 5, 32, 14, 36, self.cfg.UI_COLOR_MATCHING)
